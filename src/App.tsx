@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>ChatGPT Clone</h1>
+        <h1>LLM Chat</h1>
       </header>
       <main>
         <Chat />
