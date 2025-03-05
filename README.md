@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/lucasliet/llm-openai-ui/badge.svg?branch=feature/tests-ci-cd)](https://coveralls.io/github/lucasliet/llm-openai-ui?branch=feature/tests-ci-cd)
+[![Coverage Status](https://coveralls.io/repos/github/lucasliet/llm-openai-ui/badge.svg?branch=main)](https://coveralls.io/github/lucasliet/llm-openai-ui?branch=main)
 
 # Chat Application
 
