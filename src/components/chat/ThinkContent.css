@@ -1,0 +1,30 @@
+.think-content {
+  margin-bottom: 8px;
+}
+
+.think-toggle {
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 0;
+}
+
+.think-toggle:hover {
+  color: #444;
+}
+
+.think-details {
+  text-align: left;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #666;
+  white-space: pre-wrap;
+  border-left: 2px solid #007AFF;
+} 
