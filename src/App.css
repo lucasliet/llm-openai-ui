@@ -12,8 +12,14 @@ body {
   line-height: 1.6;
 }
 
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .app {
-  min-height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -33,13 +39,9 @@ body {
 main {
   flex: 1;
   padding: 1rem;
-}
-
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {

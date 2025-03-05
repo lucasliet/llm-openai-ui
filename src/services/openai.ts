@@ -1,10 +1,9 @@
 import { Message, Model, ModelsResponse } from '../types/chat';
 
 export async function getModels(): Promise<Model[]> {
-  // Verifica se os modelos estão no sessionStorage
   const cachedModels = sessionStorage.getItem('models');
   if (cachedModels) {
-    return JSON.parse(cachedModels); // Retorna os modelos armazenados
+    return JSON.parse(cachedModels);
   }
 
   try {
@@ -19,7 +18,6 @@ export async function getModels(): Promise<Model[]> {
     }
 
     const data: ModelsResponse = await response.json();
-    // Armazena os modelos no sessionStorage
     sessionStorage.setItem('models', JSON.stringify(data.data));
     return data.data;
   } catch (error) {

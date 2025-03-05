@@ -11,7 +11,6 @@ export function useChat() {
   const [isLoadingModels, setIsLoadingModels] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const thinkingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadModels();
@@ -73,7 +72,6 @@ export function useChat() {
       const endTime = Date.now();
       const thinkingTime = Math.round((endTime - startTime) / 1000);
 
-      // Atualiza a mensagem do assistente com o tempo de pensamento
       setMessages(prev => {
         const newMessages = [...prev];
         newMessages[newMessages.length - 1] = {

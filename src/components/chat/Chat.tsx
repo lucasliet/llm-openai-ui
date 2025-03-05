@@ -61,6 +61,18 @@ export function Chat() {
       <div className="messages-container">
         {messages.map((message, index) => {
           const { mainContent, thinkContent } = processMessage(message.content);
+          
+          const isLastAssistantMessage = 
+            index === messages.length - 1 && 
+            message.role === 'assistant' && 
+            isLoading;
+          
+          const displayContent = isLastAssistantMessage && !mainContent 
+            ? "..." 
+            : isLastAssistantMessage 
+            ? `${mainContent}...` 
+            : mainContent;
+          
           return (
             <div
               key={index}
@@ -71,7 +83,7 @@ export function Chat() {
                   <ThinkContent content={thinkContent} thinkingTime={message.thinkingTime || 0} />
                 )}
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {mainContent}
+                  {displayContent}
                 </ReactMarkdown>
               </div>
             </div>
