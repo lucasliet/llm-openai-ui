@@ -38,7 +38,7 @@ describe('OpenAI Service', () => {
       try {
         await getModels();
         // Se chegar aqui, o teste falha
-        expect(true).toBe(false);
+        fail('Test should have thrown an error');
       } catch (error) {
         expect(error.message).toContain('Erro ao buscar modelos: 401');
       }
@@ -50,7 +50,7 @@ describe('OpenAI Service', () => {
       try {
         await getModels();
         // Se chegar aqui, o teste falha
-        expect(true).toBe(false);
+        fail('Test should have thrown an error');
       } catch (error) {
         expect(error.message).toBe('Falha na rede');
       }
@@ -99,7 +99,7 @@ describe('OpenAI Service', () => {
       try {
         await sendMessage(messages, 'gpt-3.5-turbo', onStream);
         // Se chegar aqui, o teste falha
-        expect(true).toBe(false);
+        fail('Test should have thrown an error');
       } catch (error) {
         expect(error.message).toContain('Erro na API: 401');
       }
@@ -117,7 +117,7 @@ describe('OpenAI Service', () => {
       try {
         await sendMessage(messages, 'gpt-3.5-turbo', onStream);
         // Se chegar aqui, o teste falha
-        expect(true).toBe(false);
+        fail('Test should have thrown an error');
       } catch (error) {
         expect(error.message).toBe('Stream não disponível');
       }

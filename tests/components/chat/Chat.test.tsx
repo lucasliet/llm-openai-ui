@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, Mock } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Chat } from '../../../src/components/chat/Chat';
 import { useChat } from '../../../src/hooks/useChat';
 
@@ -15,7 +15,7 @@ describe('Chat', () => {
 
   it('should render the chat interface correctly', () => {
     // Configurar o mock do hook
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [],
       input: '',
       setInput: vi.fn(),
@@ -46,7 +46,7 @@ describe('Chat', () => {
 
   it('should display messages correctly', () => {
     // Configurar o mock do hook com mensagens
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [
         { role: 'user', content: 'Olá, como vai?' },
         { role: 'assistant', content: 'Estou bem, obrigado por perguntar!' }
@@ -74,7 +74,7 @@ describe('Chat', () => {
     const setInputMock = vi.fn();
     
     // Configurar o mock do hook
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [],
       input: '',
       setInput: setInputMock,
@@ -102,7 +102,7 @@ describe('Chat', () => {
     const handleSubmitMock = vi.fn();
     
     // Configurar o mock do hook
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [],
       input: 'Mensagem para enviar',
       setInput: vi.fn(),
@@ -130,7 +130,7 @@ describe('Chat', () => {
     const setSelectedModelMock = vi.fn();
     
     // Configurar o mock do hook
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [],
       input: '',
       setInput: vi.fn(),
@@ -159,7 +159,7 @@ describe('Chat', () => {
 
   it('should display loading state correctly', () => {
     // Configurar o mock do hook com estado de carregamento
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [
         { role: 'user', content: 'Olá' },
         { role: 'assistant', content: '' }
@@ -187,7 +187,7 @@ describe('Chat', () => {
 
   it('should display think content when available', () => {
     // Configurar o mock do hook com conteúdo de pensamento
-    (useChat as any).mockReturnValue({
+    (useChat as Mock).mockReturnValue({
       messages: [
         { role: 'user', content: 'Olá' },
         { role: 'assistant', content: '<think>Este é o pensamento</think>Resposta visível', thinkingTime: 3 }

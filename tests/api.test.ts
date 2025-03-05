@@ -65,7 +65,7 @@ describe('API', () => {
     try {
       await sendMessage(messages);
       // Se chegar aqui, o teste falha
-      expect(true).toBe(false);
+      fail('Test should have thrown an error');
     } catch (error) {
       expect(error.message).toContain('Erro na API: 401');
     }
@@ -82,7 +82,7 @@ describe('API', () => {
     try {
       await sendMessage(messages);
       // Se chegar aqui, o teste falha
-      expect(true).toBe(false);
+      fail('Test should have thrown an error');
     } catch (error) {
       expect(error.message).toBe('Falha na rede');
     }
