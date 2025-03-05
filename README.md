@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/lucasliet/llm-openai-ui/badge.svg?branch=feature/tests-ci-cd)](https://coveralls.io/github/lucasliet/llm-openai-ui?branch=feature/tests-ci-cd)
+
 # Chat Application
 
 A simple chat application that utilizes OpenAI's API to provide conversational responses. The application supports Markdown rendering, streaming responses, and displays the time taken for the assistant to think.

@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+
+jobs:
+  test:
+    name: Executar Testes e Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+      
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Instalar dependências
+      run: npm install --legacy-peer-deps 
+      
+    - name: Executar testes com cobertura
+      run: npm test -- --coverage --coverage.reporter=lcov
+      
+    - name: Enviar cobertura para Coveralls
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: './coverage/lcov.info'
+        base-path: '.'
+        flag-name: Unit
+      continue-on-error: true
+
+    - name: Preparar para Deploy
+      if: github.ref == 'refs/heads/main'
+      run: npm run build
+  
+    - name: Deploy para Produção
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
