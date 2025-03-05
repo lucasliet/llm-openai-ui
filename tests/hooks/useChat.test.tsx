@@ -32,6 +32,7 @@ describe('useChat', () => {
     
     expect(result.current.messages).toEqual([]);
     expect(result.current.input).toBe('');
+    expect(result.current.systemMessage).toBe('');
     expect(result.current.isLoading).toBe(false);
     
     // Espera a carga dos modelos
@@ -77,6 +78,37 @@ describe('useChat', () => {
     
     // Verifica se a entrada foi limpa
     expect(result.current.input).toBe('');
+  });
+
+  it('should include system message when provided', async () => {
+    const { result } = renderHook(() => useChat());
+    
+    // Espera a carga dos modelos
+    await waitFor(() => {
+      expect(result.current.isLoadingModels).toBe(false);
+    });
+    
+    // Define o texto de entrada e a system message
+    act(() => {
+      result.current.setInput('Olá!');
+      result.current.setSystemMessage('Seja amigável');
+    });
+    
+    // Simula o envio do formulário
+    await act(async () => {
+      const event = { preventDefault: vi.fn() } as unknown as React.FormEvent;
+      await result.current.handleSubmit(event);
+    });
+    
+    // Verifica se o sendMessage foi chamado com a system message
+    expect(sendMessage).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ role: 'system', content: 'Seja amigável' }),
+        expect.objectContaining({ role: 'user', content: 'Olá!' })
+      ]),
+      'model1',
+      expect.any(Function)
+    );
   });
 
   it('should not submit empty messages', async () => {

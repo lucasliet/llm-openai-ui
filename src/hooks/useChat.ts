@@ -2,9 +2,30 @@ import { useState, useRef, useEffect } from 'react';
 import { Message, Model } from '../types/chat';
 import { sendMessage, getModels } from '../services/openai';
 
+/**
+ * Cria o histórico de mensagens para enviar à API incluindo a mensagem do sistema, se fornecida
+ * @param systemMessage A mensagem do sistema a ser incluída no histórico, se existir
+ * @param messages As mensagens existentes no chat
+ * @param userMessage A mensagem atual do usuário
+ * @returns Um array de mensagens para enviar à API
+ */
+function createMessageHistory(
+  systemMessage: string,
+  messages: Message[],
+  userMessage: Message
+): Message[] {
+  const messageHistory: Message[] = [];
+  if (systemMessage.trim()) {
+    messageHistory.push({ role: 'system', content: systemMessage.trim() });
+  }
+  messageHistory.push(...messages, userMessage);
+  return messageHistory;
+}
+
 export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
+  const [systemMessage, setSystemMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [models, setModels] = useState<Model[]>([]);
   const [selectedModel, setSelectedModel] = useState<string>('');
@@ -57,7 +78,10 @@ export function useChat() {
 
       const startTime = Date.now();
 
-      await sendMessage([...messages, userMessage], selectedModel, (chunk) => {
+      // Usar a função para criar o histórico de mensagens
+      const messageHistory = createMessageHistory(systemMessage, messages, userMessage);
+
+      await sendMessage(messageHistory, selectedModel, (chunk) => {
         currentStreamContent += chunk;
         setMessages(prev => {
           const newMessages = [...prev];
@@ -94,6 +118,8 @@ export function useChat() {
     messages,
     input,
     setInput,
+    systemMessage,
+    setSystemMessage,
     isLoading,
     messagesEndRef,
     handleSubmit,

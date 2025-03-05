@@ -27,6 +27,8 @@ export function Chat() {
     setSelectedModel,
     isLoadingModels,
     error,
+    systemMessage,
+    setSystemMessage,
   } = useChat();
 
   return (
@@ -56,6 +58,15 @@ export function Chat() {
             )}
           </select>
           {error && <div className="error-message">{error}</div>}
+        </div>
+        <div className="system-message-container">
+          <input
+            type="text"
+            value={systemMessage}
+            onChange={(e) => setSystemMessage(e.target.value)}
+            placeholder="system message"
+            className="system-message-input"
+          />
         </div>
       </div>
       <div className="messages-container">
