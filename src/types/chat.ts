@@ -1,16 +1,7 @@
-export interface Message {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-  thinkingTime?: number;
-}
+import { CoreMessage } from "ai";
 
-export interface ChatCompletionResponse {
-  choices: Array<{
-    message: {
-      content: string;
-      role: string;
-    };
-  }>;
+export type Message = CoreMessage & {
+  thinkingTime?: number;
 }
 
 export interface Model {

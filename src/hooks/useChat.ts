@@ -105,6 +105,7 @@ export function useChat() {
         return newMessages;
       });
     } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: 'Desculpe, ocorreu um erro ao processar sua mensagem.',

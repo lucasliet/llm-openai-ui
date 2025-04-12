@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { getModels, sendMessage } from '../../src/services/openai';
 import { Message, Model } from '../../src/types/chat';
+import { fail } from 'assert';
 
 // Mock das funções
 vi.mock('../../src/services/openai', () => ({
@@ -20,8 +21,8 @@ describe('OpenAI Service', () => {
   describe('getModels', () => {
     it('deve retornar modelos do cache se disponíveis', async () => {
       const mockModels: Model[] = [
-        { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
-        { id: 'gpt-4', name: 'GPT-4' }
+        { id: 'gpt-3.5-turbo', object: 'model', created: 1677610602, owned_by: 'openai' },
+        { id: 'gpt-4', object: 'model', created: 1687882411, owned_by: 'openai' }
       ];
       
       vi.mocked(getModels).mockResolvedValue(mockModels);

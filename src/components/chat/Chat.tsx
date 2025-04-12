@@ -71,7 +71,7 @@ export function Chat() {
       </div>
       <div className="messages-container">
         {messages.map((message, index) => {
-          const { mainContent, thinkContent } = processMessage(message.content);
+          const { mainContent, thinkContent } = processMessage(message.content as string);
           
           const isLastAssistantMessage = 
             index === messages.length - 1 && 
